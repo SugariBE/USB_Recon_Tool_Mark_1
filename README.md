@@ -1,4 +1,4 @@
-Description
+Description :
 The USB Recon Tool is a portable program designed to gather system and network information from a Windows machine. It saves this data into a hidden text file on the USB drive containing the program. The tool is password-protected and operates discreetly by utilizing PowerShell commands executed in hidden mode. This project can also be implemented in C++ or C#, offering flexibility for developers familiar with different programming languages.
 
 How It Works
