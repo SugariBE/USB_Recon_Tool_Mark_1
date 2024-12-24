@@ -1,66 +1,58 @@
-Description 
+USB_Recon_Tool_Mark_1
 
-The USB Recon Tool is a portable program designed to gather system and network information from a Windows machine. It saves this data into a hidden text file on the USB drive containing the program. The tool is password-protected and operates discreetly by utilizing PowerShell commands executed in hidden mode. This project can also be implemented in C++ or C#, offering flexibility for developers familiar with different programming languages.
+### **Description**  
+The USB Recon Tool is a lightweight program designed to collect system and network information from a Windows machine. It stores this data in a hidden text file on the USB drive where the program resides. The tool is protected with a password and operates discreetly using PowerShell commands.
 
-How It Works
+---
 
-Execution:
+### **How It Works**  
+1. **Execution**:  
+   - The program is run directly from a USB drive.  
+   - It uses PowerShell to execute commands like `systeminfo` and `ipconfig` to collect data.
 
-The program is run directly from a USB flash drive.
-It uses PowerShell commands to collect data like system information (systeminfo) and network configuration (ipconfig).
+2. **Data Storage**:  
+   - Collected information is saved in a hidden file (`ipconfig_output.txt`) on the USB drive.  
+   - The file is hidden using the `attrib +h +r +s` command.
 
-Data Storage:
+3. **Password Protection**:  
+   - A password is required to unhide the file.  
+   - If the password is correct, the file becomes visible. If incorrect, new data is appended to the file, and it remains hidden.
 
-The collected information is saved in a text file named ipconfig_output.txt.
-The file is hidden using the command attrib +h +r +s.
+4. **Windows-Only**:  
+   - The tool is compatible only with Windows OS and uses native system commands.
 
-Password Protection:
+---
 
-The program asks for a password when run:
-Correct Password: Unhides the file for review.
-Incorrect Password: Collects and appends new data to the file, keeping it hidden.
+### **Key Features**  
+- **Stealth Mode**: Runs PowerShell commands in the background without showing a visible window.  
+- **Portability**: Operates directly from a USB flash drive.  
+- **Security**: Protected by a password to control access to the hidden file.  
 
-Windows-Only:
+---
 
-The tool is designed to work exclusively on Windows OS and uses native system commands.
-Alternative Implementations:
+### **Code Overview**  
+1. **PowerShell Commands**:  
+   - `systeminfo > ipconfig_output.txt`: Collects system information.  
+   - `ipconfig >> ipconfig_output.txt`: Adds network details.  
+   - `attrib +h +r +s`: Hides the output file.  
+   - `attrib -h -s -r`: Makes the file visible if the password is correct.  
 
-The functionality can be replicated in C++ or C#, leveraging their ability to handle system processes and manage files.
+2. **Hidden Execution**:  
+   - PowerShell commands are run using the `CreateProcess` API in hidden mode (`SW_HIDE`).  
 
-Key Features
+3. **Password Logic**:  
+   - On execution, the program asks for a password:  
+     - **Correct**: Unhides the file.  
+     - **Incorrect**: Collects and hides new data.  
 
-Stealth Mode: Executes PowerShell commands in the background without showing a visible window.
-Portability: Runs directly from a USB drive, requiring no installation.
-Password Security: Ensures controlled access to the hidden file.
-Language Flexibility: Can be implemented in C, C++, or C#, offering a variety of development options.
+---
 
-Code Highlights
+### **Setup and Usage**  
+- Place the program on a USB drive and run it on a target Windows machine.  
+- The tool collects and hides information automatically after execution.  
+- To access the hidden file, re-run the program and enter the correct password.
 
-PowerShell Commands:
+---
 
-systeminfo > ipconfig_output.txt: Gathers system information.
-ipconfig >> ipconfig_output.txt: Adds network details.
-attrib +h +r +s: Hides the text file.
-attrib -h -s -r: Unhides the file if the password is correct.
-
-Hidden Execution:
-
-The tool uses the CreateProcess API in C to run PowerShell commands in a completely hidden mode (SW_HIDE).
-
-Password Logic:
-
-Ensures only authorized users can unhide the data file while appending new data if access is denied.
-
-Setup and Usage
-
-Deploy: Place the compiled program on a USB drive.
-Run: Execute it on a Windows machine by clicking the program file.
-
-Collect Data:
-
-The program collects system and network data and saves it in a hidden file on the USB drive.
-Access Data: Re-run the program and enter the correct password to make the file visible.
-
-Ethical Note
-
-This tool is intended for authorized and ethical use only. Ensure you have permission before deploying it on any machine. Misuse of this tool may violate laws and ethical standards.
+### **Ethical Note**  
+This tool is for authorized use only. Ensure you have permission before deploying it on any machine.  
